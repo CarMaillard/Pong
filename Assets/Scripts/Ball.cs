@@ -3,11 +3,15 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ball : MonoBehaviour
 {
-    public float speed = 200f;
+    public float InitialSpeed = 300f;
+    public float IncreaseSpeed = 20f;
+    public float speed;
+
     public new Rigidbody2D rigidbody { get; private set; }
 
     private void Awake()
     {
+        speed = InitialSpeed;
         this.rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -15,6 +19,7 @@ public class Ball : MonoBehaviour
     {
         this.rigidbody.velocity = Vector2.zero;
         this.rigidbody.position = Vector2.zero;
+        speed = InitialSpeed;
     }
 
     public void AddStartingForce()
@@ -33,6 +38,7 @@ public class Ball : MonoBehaviour
 
     public void AddForce(Vector2 force)
     {
+        speed *= IncreaseSpeed;
         this.rigidbody.AddForce(force);
     }
 
